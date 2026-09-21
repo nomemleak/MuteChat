@@ -1,0 +1,32 @@
+# Dépendances
+node_modules/
+**/node_modules/
+
+# Build Next.js
+.next/
+out/
+
+# Git (historique complet, jamais utile au contexte)
+.git/
+
+# Config éditeur
+.vscode/
+
+# Secrets
+.env.local
+.env
+.env.*
+
+# Fichiers lourds / verrouillage
+package-lock.json
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+
+# Générés / cache
+*.min.js
+*.map
+.vercel/

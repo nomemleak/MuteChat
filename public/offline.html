@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0d0b17" />
+    <title>Offline · MuteChat</title>
+    <style>
+      :root { color-scheme: dark; }
+      body {
+        margin: 0;
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        background: #0d0b17;
+        color: #f2f0fa;
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        text-align: center;
+        padding: 1.5rem;
+      }
+      img { width: 160px; height: auto; }
+      h1 { font-size: 1.25rem; margin: 1.5rem 0 0.5rem; }
+      p { color: #a49dc4; margin: 0; max-width: 24rem; line-height: 1.6; }
+      button {
+        margin-top: 2rem;
+        border: 0;
+        border-radius: 9999px;
+        padding: 0.75rem 1.75rem;
+        background: #8744f9;
+        color: #fff;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <img src="/mascot.png" alt="" />
+      <h1>No connection</h1>
+      <p>MuteChat needs the internet to fetch your GIFs. Get back online and try again.</p>
+      <button type="button" onclick="location.reload()">Try again</button>
+    </div>
+  </body>
+</html>

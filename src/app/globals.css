@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   MuteChat — Design system
+   Colors are sampled straight from the logo: primary violet #8744f9,
+   background #0d0b17. A single dark theme, no light mode.
+   ========================================================================= */
+
+@theme {
+  /* Brand */
+  --color-brand-50: #f4edff;
+  --color-brand-100: #e7d9ff;
+  --color-brand-200: #d2b8fd;
+  --color-brand-300: #c77cfb;
+  --color-brand-400: #a65df9;
+  --color-brand-500: #8744f9;
+  --color-brand-600: #6f2ae8;
+  --color-brand-700: #5c25e5;
+  --color-brand-800: #4a1eb8;
+  --color-brand-900: #331683;
+
+  /* Surfaces — violet-tinted, no neutral grays */
+  --color-surface-0: #0d0b17;
+  --color-surface-1: #141127;
+  --color-surface-2: #1b1733;
+  --color-surface-3: #241f42;
+
+  /* Lines and text */
+  --color-line: #2a2450;
+  --color-line-soft: #201b3d;
+  --color-ink: #f2f0fa;
+  --color-ink-muted: #a49dc4;
+  --color-ink-faint: #6f678f;
+
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  /* Animations */
+  --animate-rise: rise 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-pop: pop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-fade: fade 0.25s ease-out both;
+  --animate-slide-in: slide-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-100%); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position: 200% 0; }
+}
+
+html {
+  color-scheme: dark;
+  /* Prevents the iOS rubber-band bounce from detaching the UI when installed */
+  overscroll-behavior: none;
+}
+
+body {
+  background: var(--color-surface-0);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Soft violet glow, used on the showcase screens */
+.aura {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.aura::before,
+.aura::after {
+  content: "";
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+}
+.aura::before {
+  width: 32rem; height: 32rem;
+  top: -10rem; left: -8rem;
+  background: color-mix(in srgb, var(--color-brand-600) 38%, transparent);
+}
+.aura::after {
+  width: 26rem; height: 26rem;
+  bottom: -9rem; right: -6rem;
+  background: color-mix(in srgb, var(--color-brand-400) 26%, transparent);
+}
+
+/* Frosted glass card */
+.glass {
+  background: color-mix(in srgb, var(--color-surface-1) 78%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--color-line);
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-2) 25%,
+    var(--color-surface-3) 50%,
+    var(--color-surface-2) 75%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+/* App header. One shared height for both columns: without it, the sidebar
+   (28 px logo + py-4 = 61 px) and the conversation header (40 px avatar +
+   py-3 = 65 px) didn't line up, and the content touched the top of the
+   window. The safe-area inset is ADDED to the height instead of eating into
+   the content. */
+.app-header {
+  min-height: calc(4.5rem + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* Safe areas (iOS notch, Android gesture bar) */
+.pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.pl-safe { padding-left: env(safe-area-inset-left, 0px); }
+
+/* Scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-surface-3) transparent;
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-3);
+  border-radius: 9999px;
+}
+
+/* Consistent visible focus across the app */
+:focus-visible {
+  outline: 2px solid var(--color-brand-400);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
